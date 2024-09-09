@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta name="generator" content="Hugo 0.111.3">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STRUCTURE AI</title>
+    <style>
+        :root {
+            --primary-color: #FC814A;
+            --secondary-color: #48A9A6;
+            --light-bg: #F8F8F8;
+            --dark-bg: black;
+            --font-color-light: white;
+            --font-color-dark: black;
+        }
+
+        body,
+        html {
+            font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-size: 16px;
+            word-spacing: 1px;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background-color: #F8F8F8;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 95vh;
+        }
+
+        .header {
+            height: 47.5vh;
+        }
+
+        .content {
+            text-align: right;
+            height: 47.5vh;
+        }
+
+        .content h1 {
+            font-size: 136px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            margin-right: 100px;
+        }
+        .header,
+        .content {
+            flex-grow: 1;
+        }
+        .desc, .contact {
+            padding:10px;
+        }
+        .desc{padding-left: 20px;}
+        .contact {padding-right:20px;}
+        .footer {
+            background-color: black;
+            color: white;
+            height: 5vh;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        @media screen and (max-width: 768px) {
+            .container {
+                flex-direction: row;
+            }
+
+            .content {
+                background-color: #48A9A6;
+            }
+
+            .content,
+            .header {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .responsive-image {
+                height: auto;
+                width: 100%;
+            }
+
+            .content h1,
+            .content p {
+                transform: rotate(270deg);
+                text-align: center;
+                margin-right: 0px;
+            }
+
+            .row {
+                width: 50vw;
+                flex-direction: row;
+                height: 95vh;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row header"><img class="responsive-image" src="./images/logo-b-w.png" alt="Structure Labs Logo">
+        </div>
+        <div class="row content">
+            <h1 class="content-header">STRUCTURE</h1>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="desc">AI for Alternative Investments</div>
+        <div class="contact">info@structurelabs.ai</div>
+    </div>
+
+    <script>
+        const header = document.querySelector('.header');
+        const content = document.querySelector('.content');
+        const footer = document.querySelector('.footer');
+        const contentHeader = document.querySelector('.content-header');
+
+        const changeBackgroundColor = (element, color) => {
+            if (window.innerWidth <= 768) return;
+            element.style.backgroundColor = color;
+        };
+
+        const footerHover = (hoverOn) => {
+            if (window.innerWidth <= 768) return;
+
+            const newColor = hoverOn ? 'var(--primary-color)' : 'var(--light-bg)';
+            changeBackgroundColor(header, newColor);
+            changeBackgroundColor(content, newColor);
+            contentHeader.style.color = hoverOn ? 'var(--font-color-light)' : 'var(--font-color-dark)';
+        };
+
+        const applyHoverEffect = (element, targetElement, hoverColor, defaultColor) => {
+            element.addEventListener('mouseenter', () => changeBackgroundColor(targetElement, hoverColor));
+            element.addEventListener('mouseleave', () => changeBackgroundColor(targetElement, defaultColor));
+        };
+
+        applyHoverEffect(header, content, 'var(--secondary-color)', 'var(--light-bg)');
+        applyHoverEffect(content, header, 'var(--secondary-color)', 'var(--light-bg)');
+        footer.addEventListener('mouseenter', () => footerHover(true));
+        footer.addEventListener('mouseleave', () => footerHover(false));
+    </script>
+</body>
+
+</html>
